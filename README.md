@@ -31,7 +31,7 @@ Here's how it would work:
 4. ...and so on, until you've done this for every planet and every asteroid
   
 The Math:  
-The total number of calculations per frame is roughly n², which is 209 * 209 = 43,681  
+The total number of calculations per frame is roughly n^2, which is 209 * 209 = 43,681  
   
 So, to render a single frame of your simulation, your computer has to perform over 43,000 calculations. This is incredibly inefficient  
 
