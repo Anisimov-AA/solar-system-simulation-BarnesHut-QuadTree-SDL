@@ -18,9 +18,8 @@ A real-time N-body gravitational simulation of the solar system with 9 planets a
 </div>
 
 ##  Problem Underastanding
-
-- Objects (n): 9 planets + 200 asteroids = 209 total objects.
-- The Goal: For every frame of the simulation, you need to calculate the gravitational forces and check for potential collisions for every object.
+Objects (n): 9 planets + 200 asteroids = 209 total objects  
+The Goal: For every frame of the simulation, you need to calculate the gravitational forces and check for potential collisions for every object  
 
 **The O(n^2) Brute-Force Method**  
 This method is simple: you create a checklist of every possible pair of objects and run the calculations.  
