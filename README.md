@@ -1,6 +1,4 @@
-# Solar System Simulation with Barnes-Hut Quad-Tree Algorithm
-
-A real-time N-body gravitational simulation of the solar system with 9 planets and 200 asteroids using efficient Barnes-Hut quad-tree spatial optimization.
+Real-time N-body gravitational simulation with **Barnes-Hut quad-tree optimization** - simulates 209 bodies (9 planets + 200 asteroids) efficiently
 
 <div align="center">
   <table>
@@ -59,82 +57,55 @@ The number of calculations is now roughly n * log n
 
 By using a QuadTree, we made our simulation more than 25 times faster. We achieved this by smartly organizing our data so we could ignore calculations that didn't matter, which is the core of efficient algorithm design
 
-## 📋 Key Features
+## Setup
 
-This simulation demonstrates advanced computational physics with:
+**Requirements:** C compiler (GCC), SDL2, SDL2_ttf
 
-- Barnes-Hut Quad-Tree Algorithm: O(N log N) gravitational calculations using spatial quad-trees
-- Solar System: 9 planets with realistic masses and orbital distances
-- Dynamic Asteroid Belt: 200 asteroids between Mars and Jupiter
-- Real-time Visualization: Interactive SDL2 rendering with planetary trajectory trails
-- Interactive Controls: Zoom (40x-400x) and variable speed (0.0001-0.1 time-step)
-- Data Logging: Automatic CSV export of simulation data
-
-## 🎮 Controls
-
-- Zoom: +/- buttons (top-right corner)
-- Speed: +/- buttons (middle-right corner)
-- Exit: Close window
-
-## 🏗️ Architecture
-
-The simulation uses a sophisticated quad-tree based approach:
-
-```
-main.c  
-├── Data Structures  
-│   ├── CelestialBody                    # Universal body structure for quad-tree  
-│   ├── Planet                           # Solar system planets with orbital data  
-│   └── QuadTreeNode                     # Spatial partitioning for efficient calculations  
-├── Barnes-Hut Implementation  
-│   ├── create_quadtree()                # Spatial tree construction  
-│   ├── insert_body()                    # Dynamic body insertion  
-│   ├── calculate_center_of_mass()       # Mass distribution calculation  
-│   └── calculate_force_from_quadtree()  # O(N log N) force computation  
-├── Physics Engine  
-│   ├── update_body()                    # Numerical integration (Euler method)  
-│   └── update_simulation_barnes_hut()   # Main simulation loop  
-└── Rendering System  
-    ├── render_bodies()                  # Planet and asteroid visualization  
-    ├── DrawButton()                     # Interactive UI elements  
-    └── trajectory rendering             # Orbital path display  
-```
-
-## 🛠️ Technologies
-
-- C - High-performance systems programming
-- SDL2 - Hardware-accelerated graphics and input
-- SDL2_ttf - Font rendering for UI elements
-- GCC - GNU Compiler Collection
-
-## ⚙️ Installation & Setup
-
-**Prerequisites**  
-First, install the SDL2 development library:  
-
-Ubuntu/Debian:  
-
+1. install dependencies (Ubuntu)
 ```bash
-sudo apt update  
-sudo apt install libsdl2-dev  
+sudo apt update && sudo apt install libsdl2-dev libsdl2-ttf-dev
 ```
 
-macOS (using Homebrew):
-  
-```bash
-brew install sdl2
-```
-
-**Compilation**  
-Compile using the provided Makefile:  
-
+2. compile
 ```bash
 make
 ```
 
-**Running the Simulation**  
-Execute the compiled binary:  
-
+3. run
 ```bash
 ./solar_system
+```
+
+## Usage
+
+**Controls:**
+- **Zoom:** +/− buttons (top-right) - scale from 40x to 400x
+- **Speed:** +/− buttons (middle-right) - time-step from 0.0001 to 0.1
+- **Exit:** Close window
+
+**Simulation:**
+- 9 planets with realistic masses and orbital distances
+- 200 asteroids in belt between Mars and Jupiter
+- Planetary trajectory trails show orbital paths
+- CSV data automatically exported to file
+
+## Architecture
+```
+main.c
+├── Data Structures
+│   ├── CelestialBody   # position, velocity, mass, force
+│   ├── Planet          # solar system data (orbital parameters)
+│   └── QuadTreeNode    # spatial partition with center of mass
+├── Barnes-Hut Algorithm
+│   ├── create_quadtree()                # build spatial tree
+│   ├── insert_body()                    # add body to correct quadrant
+│   ├── calculate_center_of_mass()       # compute node mass distribution
+│   └── calculate_force_from_quadtree()  # O(n log n) force calculation
+├── Physics
+│   ├── update_body()                    # Euler integration (F=ma)
+│   └── update_simulation_barnes_hut()   # main simulation loop
+└── Rendering
+    ├── render_bodies()       # draw planets/asteroids
+    ├── DrawButton()          # UI controls
+    └── trajectory_rendering  # orbital path trails
 ```
